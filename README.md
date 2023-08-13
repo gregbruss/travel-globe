@@ -1,1 +1,1 @@
-# travel-globe
+# globe
