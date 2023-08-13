@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Globe</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        #globeViz {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="globeViz"></div>
+
+    <script src="//unpkg.com/globe.gl"></script>
+    <script>
+        const myDOMElement = document.getElementById('globeViz');
+
+        // Initialize globe
+        const myGlobe = Globe()(myDOMElement);
+        
+        // Use a basic globe image for visualization (you can change this URL to another image if preferred)
+        const myImageUrl = '//unpkg.com/three-globe/example/img/earth-night.jpg';
+        
+        const myLabelData = [
+    { lat: 52.3676, lng: 4.9041, text: "Amsterdam" },
+    { lat: 50.8514, lng: 5.6910, text: "Maastricht" },
+    { lat: -26.2041, lng: 28.0473, text: "Johannesburg" },
+    { lat: 28.2282, lng: 112.9388, text: "Changsha" },
+    { lat: 39.9042, lng: 116.4074, text: "Beijing" },
+    { lat: 52.5200, lng: 13.4050, text: "Berlin" },
+    { lat: 51.5413, lng: 9.9158, text: "Göttingen" },
+    { lat: 47.3286, lng: 11.1890, text: "Seefeld" },
+    { lat: 48.2082, lng: 16.3738, text: "Vienna" },
+    { lat: 27.9202, lng: -15.5474, text: "Gran Canaria" },
+    { lat: 44.7866, lng: 20.4489, text: "Belgrade" },
+    { lat: 22.3193, lng: 114.1694, text: "Hong Kong" },
+    { lat: 13.7563, lng: 100.5018, text: "Bangkok" },
+    { lat: 10.0956, lng: 99.8404, text: "Koh Tao" },
+    { lat: 1.3521, lng: 103.8198, text: "Singapore" },
+    { lat: -33.9249, lng: 18.4241, text: "Cape Town" },
+    { lat: 38.7223, lng: -9.1393, text: "Lisbon" },
+    { lat: 48.1351, lng: 11.5820, text: "Munich" }
+];
+
+myGlobe.labelsData(myLabelData)
+               .labelText(d => d.text)
+               .labelLat(d => d.lat)
+               .labelLng(d => d.lng)
+               .labelColor(() => 'white')  // Adjust color as desired
+               .labelSize(0.5)                 // Adjust label size as desired
+               .labelIncludeDot(true)          // Include a dot marker next to text
+               .labelDotRadius(0.4)            // Adjust dot size if necessary
+               .labelDotOrientation('bottom'); // Set orientation of label in relation to dot
+
+
+        
+        const myArcData = [
+    { startLat: -26.2041, startLng: 28.0473, endLat: -33.9249, endLng: 18.4241 }, // Johannesburg <-> Cape Town
+    { startLat: -33.9249, startLng: 18.4241, endLat: 50.8514, endLng: 5.6910 },  // Cape Town <-> Maastricht
+    { startLat: 50.8514, startLng: 5.6910, endLat: 52.3676, endLng: 4.9041 },    // Maastricht <-> Amsterdam
+    { startLat: 52.3676, startLng: 4.9041, endLat: 52.5200, endLng: 13.4050 },   // Amsterdam <-> Berlin
+    { startLat: 52.5200, startLng: 13.4050, endLat: 51.5413, endLng: 9.9158 },   // Berlin <-> Göttingen
+    { startLat: 52.3676, startLng: 4.9041, endLat: 38.7223, endLng: -9.1393 },   // Amsterdam <-> Lisbon
+    { startLat: 52.3676, startLng: 4.9041, endLat: 48.1351, endLng: 11.5820 },   // Amsterdam <-> Munich
+    { startLat: 52.3676, startLng: 4.9041, endLat: -26.2041, endLng: 28.0473 }   // Amsterdam <-> Johannesburg 
+        ];
+
+myGlobe.arcsData(myArcData)
+      .arcStroke('white')
+      .arcAltitudeAutoScale(0.5);
+
+
+        myGlobe.globeImageUrl(myImageUrl);
+        
+
+    </script>
+</body>
+</html>
