@@ -21,15 +21,15 @@
 <body>
     <div id="globeViz"></div>
 
-    <script src="https://unpkg.com/globe.gl"></script>
+    <script src="globe.gl.js"></script>
     <script>
         const myDOMElement = document.getElementById('globeViz');
 
         // Initialize globe
         const myGlobe = Globe()(myDOMElement);
         
-        // Use a basic globe image for visualization (you can change this URL to another image if preferred)
-        const myImageUrl = 'https://unpkg.com/three-globe/example/img/earth-night.jpg';
+        // Use a basic globe image for visualization
+        const myImageUrl = 'earth-night.jpg';
         
         const myLabelData = [
     { lat: 52.3676, lng: 4.9041, text: "Amsterdam" },
